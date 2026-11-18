@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light"><title>Clareza | Gestor financeiro</title>
+  <link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Clareza, início"><span class="brand-mark">C</span><span>clareza<small>FINANÇAS PESSOAIS</small></span></a>
+    <div class="side-label">ESPAÇO PESSOAL</div>
+    <a class="nav-active" href="#painel"><span>◫</span> Visão geral</a>
+    <a class="nav-item" href="#lancamentos"><span>≡</span> Lançamentos</a>
+    <div class="side-bottom"><div class="side-icon">✦</div><strong>Um passo de cada vez.</strong><p>Entender seu dinheiro é o começo de boas escolhas.</p></div>
+  </aside>
+  <main id="painel" class="main">
+    <header class="topbar"><span>SEU PAINEL FINANCEIRO</span><span class="privacy">◉ &nbsp; Seus dados ficam neste computador</span></header>
+    <div class="page-heading"><div><div class="eyebrow">OLÁ, BEM-VINDO(A)</div><h1>Seu dinheiro, com clareza.</h1><p>Acompanhe suas movimentações e entenda para onde seu dinheiro vai.</p></div><button class="primary" id="newTransaction">＋ &nbsp; Novo lançamento</button></div>
+    <section class="overview" aria-label="Resumo financeiro do mês">
+      <article class="summary balance"><div class="card-top"><span>Saldo do mês</span><span class="icon-circle">◈</span></div><strong id="saldo">R$ 0,00</strong><p>Receitas menos despesas</p><div class="balance-decoration"></div></article>
+      <article class="summary"><div class="card-top"><span>Entradas</span><span class="icon-circle income-icon">↗</span></div><strong id="receitas">R$ 0,00</strong><p>Receitas no período</p></article>
+      <article class="summary"><div class="card-top"><span>Saídas</span><span class="icon-circle expense-icon">↘</span></div><strong id="despesas">R$ 0,00</strong><p>Despesas no período</p></article>
+    </section>
+    <section class="content-grid">
+      <div class="panel transactions" id="lancamentos">
+        <div class="section-heading"><div><div class="eyebrow">MOVIMENTAÇÕES</div><h2>Seus lançamentos</h2><p>Entradas e saídas do mês selecionado.</p></div><button class="outline" id="exportCsv">↓ &nbsp; Exportar CSV</button></div>
+        <div class="filters"><label><span>Mês</span><input type="month" id="month"></label><label><span>Tipo</span><select id="filterType"><option value="">Todos os tipos</option><option value="receita">Receitas</option><option value="despesa">Despesas</option></select></label><label class="search"><span>Buscar</span><input id="search" type="search" placeholder="Descrição ou categoria"></label></div>
+        <div class="table-wrap"><table><thead><tr><th>DESCRIÇÃO</th><th>DATA</th><th>CATEGORIA</th><th>VALOR</th><th><span class="sr-only">Ações</span></th></tr></thead><tbody id="transactionList"></tbody></table></div>
+        <div id="empty" class="empty" hidden><div class="empty-icon">◎</div><strong>Nenhum lançamento por aqui</strong><p>Adicione uma receita ou despesa para começar a acompanhar seu mês.</p></div>
+        <div class="list-footer"><span id="count">0 lançamentos</span><span>Valores em reais (BRL)</span></div>
+      </div>
+      <aside class="insights"><div class="panel category-panel"><div class="eyebrow">PARA ONDE VAI</div><h2>Despesas por categoria</h2><p>Distribuição das saídas no mês.</p><div id="categories" class="categories"></div><div class="category-empty" id="categoryEmpty">Suas categorias aparecerão aqui quando você adicionar despesas.</div></div><div class="tip"><span>✳</span><h3>Pequenos registros, grandes decisões.</h3><p>Registrar tudo, até os gastos menores, ajuda a enxergar seus hábitos com mais clareza.</p></div></aside>
+    </section>
+    <footer>CLAREZA &nbsp; / &nbsp; ORGANIZE HOJE, PLANEJE AMANHÃ.</footer>
+  </main>
+</div>
+<dialog id="transactionDialog"><form id="transactionForm"><div class="modal-head"><div><div class="eyebrow">ORGANIZE SUAS FINANÇAS</div><h2 id="dialogTitle">Novo lançamento</h2><p>Preencha os dados da movimentação.</p></div><button type="button" class="close" id="closeDialog" aria-label="Fechar">×</button></div><input type="hidden" id="transactionId"><div class="form-grid"><label class="full">Descrição<input id="description" required maxlength="100" placeholder="Ex.: Conta de internet"></label><label>Tipo<select id="type" required><option value="despesa">Despesa</option><option value="receita">Receita</option></select></label><label>Categoria<input id="category" list="categoryOptions" required maxlength="50" placeholder="Ex.: Moradia"><datalist id="categoryOptions"><option>Alimentação</option><option>Moradia</option><option>Transporte</option><option>Saúde</option><option>Educação</option><option>Lazer</option><option>Salário</option><option>Outros</option></datalist></label><label>Valor (R$)<input id="amount" type="number" inputmode="decimal" required min="0.01" max="100000000" step="0.01" placeholder="0,00"></label><label>Data<input id="date" type="date" required></label></div><p id="formError" class="error" role="alert"></p><div class="modal-actions"><button type="button" class="outline" id="cancelDialog">Cancelar</button><button class="primary" type="submit">Salvar lançamento</button></div></form></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body></html>
+
